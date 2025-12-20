@@ -269,6 +269,8 @@ ul {
   font-weight: 600;
   cursor: pointer;
   transition: var(--transition);
+  text-decoration: none;
+  display: inline-block;
 }
 
 .cta-button:hover {

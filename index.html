@@ -49,7 +49,7 @@
           <li><a href="#about" class="nav-link">O nama</a></li>
           <li><a href="#contact" class="nav-link">Kontakt</a></li>
         </ul>
-        <button class="cta-button"><a href="#contact">Rezerviši čas</a></button>
+        <a href="#contact" class="cta-button nav-link">Rezerviši čas</a>
         <div class="hamburger">
           <span></span>
           <span></span>
@@ -70,9 +70,9 @@
             i svesnost.
           </p>
           <div class="hero-buttons">
-            <button class="btn-primary">
-              <a href="#contact">Započnite svoje putovanje</a>
-            </button>
+            <a href="#contact" class="btn-primary nav-link"
+              >Započnite svoje putovanje</a
+            >
             <button class="btn-secondary">
               <i class="fas fa-play"></i>
               Pogledajte video
@@ -316,19 +316,41 @@
           </div>
 
           <div class="contact-form">
-            <form>
+            <form id="contact-form">
+              <input
+                type="hidden"
+                name="access_key"
+                value="2af5c05f-b38f-49c3-86c9-f6dd91e1e27d"
+              />
+
               <h3>Rezervišite svoj prvi čas</h3>
               <div class="form-group">
-                <input type="text" placeholder="Ime i prezime" required />
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Ime i prezime"
+                  required
+                />
               </div>
               <div class="form-group">
-                <input type="email" placeholder="Email adresa" required />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email adresa"
+                  required
+                />
               </div>
               <div class="form-group">
-                <input type="tel" placeholder="Broj telefona" required />
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="Broj telefona"
+                  required
+                />
               </div>
               <div class="form-group">
                 <textarea
+                  name="message"
                   placeholder="Recite nam o svojim fitnes ciljevima i eventualnim povredama ili zabrinutostima"
                   rows="4"
                 ></textarea>

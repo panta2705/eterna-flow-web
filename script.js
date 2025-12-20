@@ -56,6 +56,9 @@ document.addEventListener("DOMContentLoaded", function () {
           behavior: "smooth",
           block: "start",
         });
+
+        // Update URL after scrolling
+        history.pushState(null, null, targetId);
       }
     });
   });
@@ -73,44 +76,30 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Form submission
-  const contactForm = document.querySelector(".contact-form form");
+  const contactForm = document.getElementById("contact-form");
   if (contactForm) {
-    contactForm.addEventListener("submit", function (e) {
+    contactForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
       // Get form data
-      const formData = new FormData(this);
-      const data = Object.fromEntries(formData.entries());
+      const formData = new FormData(contactForm);
+      try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          body: formData,
+        });
 
-      // Show success message (you can replace this with actual form submission)
-      alert(
-        "Thank you for your interest! We will contact you soon to schedule your first class."
-      );
-
-      // Reset form
-      this.reset();
-    });
-  }
-
-  // CTA Button clicks
-  const ctaButtons = document.querySelectorAll(
-    ".cta-button, .btn-primary, .btn-class"
-  );
-  ctaButtons.forEach((button) => {
-    button.addEventListener("click", function (e) {
-      // If it's not a form submit button, scroll to contact section
-      if (this.type !== "submit" && !this.closest("form")) {
-        e.preventDefault();
-        const contactSection = document.querySelector("#contact");
-        if (contactSection) {
-          contactSection.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
+        if (response.ok) {
+          alert("Poruka je uspešno poslata 💌");
+          contactForm.reset();
+        } else {
+          alert("Greška. Pokušajte ponovo.");
         }
+      } catch (error) {
+        alert("Greška pri slanju.");
       }
     });
-  });
+  }
 
   // Animate elements on scroll
   const observerOptions = {
